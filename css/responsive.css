@@ -1,0 +1,227 @@
+/* ===================================================
+   Speech Spark — responsive
+=================================================== */
+
+@media (max-width: 1080px) {
+    .programs-grid,
+    .directory-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .impact-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px 20px;
+    }
+
+    .footer-top {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+    }
+
+    .footer-brand {
+        grid-column: 1 / -1;
+    }
+
+    .chapters-map-wrap {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 900px) {
+    section {
+        padding: 84px 0;
+    }
+
+    /* mobile navigation */
+    .nav-toggle {
+        display: block;
+        z-index: 1100;
+    }
+
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100vh;
+        width: min(78%, 340px);
+        background: var(--cream);
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 8px;
+        padding: 40px 44px;
+        box-shadow: -10px 0 40px rgba(0, 0, 0, 0.12);
+        transform: translateX(100%);
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .nav-links.open {
+        transform: translateX(0);
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .nav-links a {
+        font-size: 1.4rem;
+        font-family: var(--serif);
+        padding: 10px 0;
+    }
+
+    .nav-links .nav-button {
+        margin-top: 16px;
+        font-family: var(--sans);
+        font-size: 1rem;
+    }
+
+    body.menu-open {
+        overflow: hidden;
+    }
+
+    /* hero */
+    .hero {
+        grid-template-columns: 1fr;
+        gap: 50px;
+        min-height: auto;
+        padding-top: 130px;
+        padding-bottom: 70px;
+    }
+
+    .hero-right {
+        height: 460px;
+    }
+
+    .hero-right .hero-photo-main {
+        inset: 0 30px 40px 0;
+    }
+
+    /* mission */
+    .mission-container {
+        grid-template-columns: 1fr;
+        gap: 60px;
+    }
+
+    .mission-images {
+        height: 460px;
+    }
+
+    /* camps */
+    .camps-intro {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .timeline {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .timeline::before {
+        left: 0;
+        transform: none;
+    }
+
+    .timeline-step {
+        padding-left: 26px;
+    }
+
+    .camps-cta {
+        padding: 40px 34px;
+    }
+
+    /* photo break: fixed attachment is unreliable on mobile */
+    .photo-break {
+        background-attachment: scroll;
+    }
+
+    /* volunteer / prose / contact */
+    .volunteer-container,
+    .prose-split,
+    .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 50px;
+    }
+
+    .prose-split.reverse .prose-media {
+        order: 0;
+    }
+
+    .faq-container {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    /* gallery collapses to a simpler mosaic */
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: 180px;
+    }
+
+    .g-big,
+    .g-wide {
+        grid-column: span 2;
+    }
+}
+
+@media (max-width: 620px) {
+    .wrapper,
+    .wrapper.wide,
+    .hero,
+    .navbar .wrapper {
+        width: 90%;
+    }
+
+    .programs-grid,
+    .directory-grid,
+    .impact-grid,
+    .footer-top {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-brand {
+        grid-column: auto;
+    }
+
+    .hero-stats {
+        gap: 30px;
+    }
+
+    .mission-values {
+        grid-template-columns: 1fr;
+    }
+
+    .gallery-grid {
+        grid-template-columns: 1fr;
+        grid-auto-rows: 240px;
+    }
+
+    .g-big,
+    .g-wide,
+    .g-tall {
+        grid-column: auto;
+        grid-row: auto;
+    }
+
+    .directory-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .directory-count {
+        margin-left: 0;
+    }
+
+    .camps-cta,
+    .contact-form {
+        padding: 30px 22px;
+    }
+
+    .chapter-detail,
+    .map-panel {
+        padding: 26px;
+    }
+
+    .statement {
+        padding: 100px 0;
+    }
+}

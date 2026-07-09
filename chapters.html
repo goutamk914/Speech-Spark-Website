@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapters | Speech Spark</title>
+    <meta name="description" content="Find a Speech Spark chapter near you. Explore the interactive map and searchable directory of chapters across the United States and internationally.">
+    <meta name="theme-color" content="#fef4d9">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <a href="#main" class="skip-link">Skip to content</a>
+
+    <header class="navbar">
+        <div class="wrapper">
+            <a href="index.html" class="logo" aria-label="Speech Spark home"><img src="assets/logos/Main.png" alt="Speech Spark"></a>
+            <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="primary-nav"><span></span></button>
+            <nav class="nav-links" id="primary-nav" aria-label="Primary">
+                <a href="about.html">About</a>
+                <a href="programs.html">Programs</a>
+                <a href="camps.html">Speech Camps</a>
+                <a href="chapters.html">Chapters</a>
+                <a href="volunteer.html">Volunteer</a>
+                <a href="contact.html" class="nav-button">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main">
+
+    <section class="page-header">
+        <div class="wrapper">
+            <p class="breadcrumb"><a href="index.html">Home</a> / Chapters</p>
+            <p class="eyebrow">Chapters</p>
+            <h1>Local chapters, shared mission.</h1>
+            <p>Each Speech Spark chapter has its own local color while staying connected to the same core program. Explore the map, then browse the full directory.</p>
+        </div>
+    </section>
+
+    <section class="chapters">
+        <div class="wrapper wide">
+            <div class="chapters-map-wrap reveal">
+                <div class="map-panel" id="map-panel" aria-label="Map of Speech Spark chapters across the United States">
+                    <div class="map-legend"><span class="dot" aria-hidden="true"></span> Select a marker to view chapter details</div>
+                </div>
+                <div class="chapter-detail" id="chapter-detail" aria-live="polite">
+                    <p class="cd-hint">Select a chapter on the map to see its details, or browse the directory below. International chapters are listed in the directory.</p>
+                </div>
+            </div>
+
+            <div class="directory-controls reveal">
+                <div class="directory-search">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3-3" stroke-linecap="round"/></svg>
+                    <input type="search" id="chapter-search" placeholder="Search chapters or cities..." aria-label="Search chapters">
+                </div>
+                <select id="chapter-state" aria-label="Filter by state or region">
+                    <option value="">All locations</option>
+                </select>
+                <select id="chapter-sort" aria-label="Sort chapters">
+                    <option value="az">Sort: A–Z</option>
+                    <option value="za">Sort: Z–A</option>
+                    <option value="state">Sort: By state</option>
+                </select>
+                <span class="directory-count" id="chapter-count"></span>
+            </div>
+
+            <div class="directory-grid" id="chapter-directory"></div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <div class="wrapper">
+            <div class="reveal">
+                <p class="eyebrow on-dark">Don't See Your City?</p>
+                <h2>Start a chapter where you live.</h2>
+                <p>Students can bring Speech Spark to their own community with support from the wider team.</p>
+                <div class="hero-buttons">
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSd--zFzzUYnIgWUZeGVBupkKX0qBzTiGZEEfWgyRt3ukHwYlg/viewform" class="primary-button" target="_blank" rel="noopener">Start a Chapter</a>
+                    <a href="contact.html" class="secondary-button">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    </main>
+
+    <footer>
+        <div class="wrapper wide">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <img src="assets/logos/Main.png" alt="Speech Spark">
+                    <p>A student-led nonprofit teaching debate, speech, Model UN, and communication through beginner-friendly camps and chapters.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Explore</h4>
+                    <a href="about.html">About</a>
+                    <a href="programs.html">Programs</a>
+                    <a href="camps.html">Speech Camps</a>
+                    <a href="chapters.html">Chapters</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Get Involved</h4>
+                    <a href="volunteer.html">Volunteer</a>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSd--zFzzUYnIgWUZeGVBupkKX0qBzTiGZEEfWgyRt3ukHwYlg/viewform" target="_blank" rel="noopener">Start a Chapter</a>
+                    <a href="contact.html">Contact</a>
+                    <a href="index.html#faq">FAQ</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Connect</h4>
+                    <a href="mailto:speechsparksinitiative@gmail.com">speechsparksinitiative@gmail.com</a>
+                    <a href="https://www.instagram.com/speechsparksinitiative/" target="_blank" rel="noopener">@speechsparksinitiative</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="year"></span> Speech Spark. All rights reserved.</p>
+                <div class="footer-social">
+                    <a href="https://www.instagram.com/speechsparksinitiative/" target="_blank" rel="noopener" aria-label="Speech Spark on Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+                    <a href="mailto:speechsparksinitiative@gmail.com" aria-label="Email Speech Spark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/us-map-data.js"></script>
+    <script src="js/chapters.js"></script>
+</body>
+</html>
