@@ -1,8 +1,6 @@
 /* Speech Spark — chapters map and directory */
 
-import chaptersData from "./data/chapters-data.json";
-var CHAPTERS = chaptersData;
-
+var CHAPTERS = window.SPEECH_SPARK_CHAPTERS || [];
 (function () {
     "use strict";
 
