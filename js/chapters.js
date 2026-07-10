@@ -159,13 +159,8 @@
 
             g.appendChild(pulse); g.appendChild(pin); g.appendChild(title);
 
-            function pick(e) {
-                if (e) e.stopPropagation();
-                select(ch, true);
-            }
-            g.addEventListener("click", pick);
             g.addEventListener("keydown", function (e) {
-                if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pick(e); }
+                if (e.key === "Enter" || e.key === " ") { e.preventDefault(); select(ch, true); }
             });
 
             zoomLayer.appendChild(g);
@@ -203,6 +198,17 @@
         mapPanel.appendChild(ctr);
     }
 
+    function markerFrom(target) {
+        return target && target.closest ? target.closest(".map-marker") : null;
+    }
+
+    function chapterByName(name) {
+        for (var i = 0; i < CHAPTERS.length; i++) {
+            if (CHAPTERS[i].name === name) return CHAPTERS[i];
+        }
+        return null;
+    }
+
     function bindGestures() {
         svg.addEventListener("wheel", function (e) {
             e.preventDefault();
@@ -211,24 +217,52 @@
             zoomAt(p.x, p.y, scale * factor);
         }, { passive: false });
 
-        var dragging = false, lastX = 0, lastY = 0, moved = false;
+        var down = false, panning = false, pid = null;
+        var startX = 0, startY = 0, lastX = 0, lastY = 0;
+
         svg.addEventListener("pointerdown", function (e) {
-            dragging = true; moved = false; lastX = e.clientX; lastY = e.clientY;
-            svg.setPointerCapture(e.pointerId);
-            svg.classList.add("grabbing");
+            down = true;
+            panning = false;
+            pid = e.pointerId;
+            startX = lastX = e.clientX;
+            startY = lastY = e.clientY;
         });
+
         svg.addEventListener("pointermove", function (e) {
-            if (!dragging) return;
-            var rect = svg.getBoundingClientRect();
-            var sx = MAP.w / rect.width, sy = MAP.h / rect.height;
-            var dx = (e.clientX - lastX) * sx, dy = (e.clientY - lastY) * sy;
-            if (Math.abs(e.clientX - lastX) + Math.abs(e.clientY - lastY) > 3) moved = true;
-            tx += dx; ty += dy; lastX = e.clientX; lastY = e.clientY;
-            apply();
+            if (!down) return;
+            /* only start panning (and capture the pointer) once the pointer
+               has actually moved — otherwise a tap is stolen from the pins */
+            if (!panning && Math.hypot(e.clientX - startX, e.clientY - startY) > 5) {
+                panning = true;
+                svg.classList.add("grabbing");
+                try { svg.setPointerCapture(pid); } catch (err) {}
+            }
+            if (panning) {
+                var rect = svg.getBoundingClientRect();
+                tx += (e.clientX - lastX) * (MAP.w / rect.width);
+                ty += (e.clientY - lastY) * (MAP.h / rect.height);
+                lastX = e.clientX;
+                lastY = e.clientY;
+                apply();
+            }
         });
-        function end() { dragging = false; svg.classList.remove("grabbing"); }
-        svg.addEventListener("pointerup", end);
-        svg.addEventListener("pointercancel", end);
+
+        function finish(e) {
+            if (down && !panning) {
+                var marker = markerFrom(e.target);
+                if (marker) {
+                    var ch = chapterByName(marker.dataset.name);
+                    if (ch) select(ch, true);
+                }
+            }
+            down = false;
+            panning = false;
+            svg.classList.remove("grabbing");
+            try { if (pid !== null && svg.hasPointerCapture && svg.hasPointerCapture(pid)) svg.releasePointerCapture(pid); } catch (err) {}
+            pid = null;
+        }
+        svg.addEventListener("pointerup", finish);
+        svg.addEventListener("pointercancel", finish);
     }
 
     /* ---------------- DIRECTORY ---------------- */
