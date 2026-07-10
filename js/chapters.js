@@ -1,5 +1,8 @@
 /* Speech Spark — chapters map and directory */
 
+import chaptersData from "./data/chapters-data.json";
+var CHAPTERS = chaptersData;
+
 (function () {
     "use strict";
 
@@ -9,29 +12,6 @@
     /* Per-chapter ig/email left null where not provided; the panel then shows
        the main organization's handle marked "(NOT GIVEN)". Fill these in as
        chapters share their own accounts. */
-    var CHAPTERS = [
-        { name: "Ashburn",       city: "Ashburn",       state: "VA", stateName: "Virginia",      country: "United States", region: "Northern Virginia", lat: 39.043, lng: -77.487, logo: "assets/logos/Ashburn.PNG", ig: null, email: null },
-        { name: "Chantilly",     city: "Chantilly",     state: "VA", stateName: "Virginia",      country: "United States", region: "Northern Virginia", lat: 38.894, lng: -77.431, logo: "assets/logos/Chantilly.PNG", ig: null, email: null },
-        { name: "Haymarket",     city: "Haymarket",     state: "VA", stateName: "Virginia",      country: "United States", region: "Northern Virginia", lat: 38.812, lng: -77.636, logo: "assets/logos/Haymarket.PNG", ig: null, email: null },
-        { name: "Manassas",      city: "Manassas",      state: "VA", stateName: "Virginia",      country: "United States", region: "Northern Virginia", lat: 38.751, lng: -77.475, logo: "assets/logos/Manassas.PNG", ig: null, email: null },
-        { name: "McLean",        city: "McLean",        state: "VA", stateName: "Virginia",      country: "United States", region: "Northern Virginia", lat: 38.934, lng: -77.178, logo: "assets/logos/Mclean.PNG", ig: null, email: null },
-        { name: "South Riding",  city: "South Riding",  state: "VA", stateName: "Virginia",      country: "United States", region: "Northern Virginia", lat: 38.920, lng: -77.513, logo: "assets/logos/SouthRiding.PNG", ig: null, email: null },
-        { name: "Sterling",      city: "Sterling",      state: "VA", stateName: "Virginia",      country: "United States", region: "Northern Virginia", lat: 39.006, lng: -77.429, logo: "assets/logos/Sterling.PNG", ig: null, email: null },
-        { name: "Woodbridge",    city: "Woodbridge",    state: "VA", stateName: "Virginia",      country: "United States", region: "Northern Virginia", lat: 38.658, lng: -77.250, logo: "assets/logos/Woodbridge.PNG", ig: null, email: null },
-        { name: "Princeton",     city: "Princeton",     state: "NJ", stateName: "New Jersey",    country: "United States", region: "Northeast",         lat: 40.357, lng: -74.667, logo: "assets/logos/Princeton.PNG", ig: null, email: null },
-        { name: "Brookfield",    city: "Brookfield",    state: "WI", stateName: "Wisconsin",     country: "United States", region: "Midwest",           lat: 43.061, lng: -88.107, logo: "assets/logos/Brookfield.PNG", ig: null, email: null },
-        { name: "Orlando",       city: "Orlando",       state: "FL", stateName: "Florida",       country: "United States", region: "Southeast",         lat: 28.538, lng: -81.379, logo: "assets/logos/Orlando.PNG", ig: null, email: null },
-        { name: "South Florida", city: "South Florida", state: "FL", stateName: "Florida",       country: "United States", region: "Southeast",         lat: 25.995, lng: -80.239, logo: "assets/logos/SouthFlorida.PNG", ig: null, email: null },
-        { name: "Diamond Bar",   city: "Diamond Bar",   state: "CA", stateName: "California",    country: "United States", region: "West Coast",        lat: 34.029, lng: -117.810, logo: "assets/logos/DiamondBar.PNG", ig: null, email: null },
-        { name: "Saratoga",      city: "Saratoga",      state: "CA", stateName: "California",    country: "United States", region: "West Coast",        lat: 37.264, lng: -122.023, logo: "assets/logos/Saratoga.PNG", ig: null, email: null },
-        { name: "Seattle",       city: "Seattle",       state: "WA", stateName: "Washington",    country: "United States", region: "Pacific Northwest", lat: 47.606, lng: -122.332, logo: "assets/logos/Seattle.PNG", ig: null, email: null },
-        { name: "Spokane",       city: "Spokane",       state: "WA", stateName: "Washington",    country: "United States", region: "Pacific Northwest", lat: 47.659, lng: -117.426, logo: "assets/logos/Spokane.PNG", ig: null, email: null },
-        { name: "Chandigarh",    city: "Chandigarh",    state: "",   stateName: "Chandigarh",    country: "India",  region: "International", lat: 30.733, lng: 76.779, logo: "assets/logos/Chandigarh.PNG", ig: null, email: null },
-        { name: "Lucknow",       city: "Lucknow",       state: "",   stateName: "Uttar Pradesh", country: "India",  region: "International", lat: 26.847, lng: 80.947, logo: "assets/logos/Lucknow.PNG", ig: null, email: null },
-        { name: "Nepal",         city: "Kathmandu",     state: "",   stateName: "Bagmati",       country: "Nepal",  region: "International", lat: 27.717, lng: 85.324, logo: "assets/logos/Nepal.PNG", ig: null, email: null },
-        { name: "Uttarakhand",   city: "Dehradun",      state: "",   stateName: "Uttarakhand",   country: "India",  region: "International", lat: 30.3165, lng: 78.0322, logo: "assets/logos/Uttarakhand.jpeg", ig: null, email: null }
-    ];
-
     var MAP = window.SPEECH_SPARK_US_MAP || { w: 960, h: 600, states: [], markers: {} };
     var SVGNS = "http://www.w3.org/2000/svg";
 
