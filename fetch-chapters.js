@@ -18,7 +18,7 @@ const fs = require("fs");
 const path = require("path");
 
 const WEBAPP_URL = process.env.SHEET_WEBAPP_URL;
-const OUT_PATH = path.join(__dirname, "data", "chapters-data.json");
+const OUT_PATH = path.join(__dirname, "data", "chapters-data.js");
 
 const REQUIRED_FIELDS = ["name", "city", "country", "region", "lat", "lng", "logo"];
 const HANDLE_RE = /^[A-Za-z0-9._]+$/;
@@ -126,7 +126,14 @@ async function main() {
   }
 
   fs.mkdirSync(path.dirname(OUT_PATH), { recursive: true });
-  fs.writeFileSync(OUT_PATH, JSON.stringify(cleaned, null, 2) + "\n");
+
+  const output =
+    "window.SPEECH_SPARK_CHAPTERS = " +
+    JSON.stringify(cleaned, null, 2) +
+    ";\n";
+  
+  fs.writeFileSync(OUT_PATH, output);
+  
   console.log(`\nWrote ${cleaned.length} chapters to ${OUT_PATH}`);
 }
 

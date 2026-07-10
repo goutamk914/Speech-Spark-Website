@@ -1,4 +1,4 @@
-[
+window.SPEECH_SPARK_CHAPTERS = [
   {
     "name": "Ashburn",
     "city": "Ashburn",
@@ -259,4 +259,4 @@
     "ig": null,
     "email": null
   }
-]
+];
