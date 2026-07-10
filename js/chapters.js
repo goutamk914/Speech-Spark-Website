@@ -28,7 +28,8 @@
         { name: "Spokane",       city: "Spokane",       state: "WA", stateName: "Washington",    country: "United States", region: "Pacific Northwest", lat: 47.659, lng: -117.426, logo: "assets/logos/Spokane.PNG", ig: null, email: null },
         { name: "Chandigarh",    city: "Chandigarh",    state: "",   stateName: "Chandigarh",    country: "India",  region: "International", lat: 30.733, lng: 76.779, logo: "assets/logos/Chandigarh.PNG", ig: null, email: null },
         { name: "Lucknow",       city: "Lucknow",       state: "",   stateName: "Uttar Pradesh", country: "India",  region: "International", lat: 26.847, lng: 80.947, logo: "assets/logos/Lucknow.PNG", ig: null, email: null },
-        { name: "Nepal",         city: "Kathmandu",     state: "",   stateName: "Bagmati",       country: "Nepal",  region: "International", lat: 27.717, lng: 85.324, logo: "assets/logos/Nepal.PNG", ig: null, email: null }
+        { name: "Nepal",         city: "Kathmandu",     state: "",   stateName: "Bagmati",       country: "Nepal",  region: "International", lat: 27.717, lng: 85.324, logo: "assets/logos/Nepal.PNG", ig: null, email: null },
+        { name: "Uttarakhand",   city: "Dehradun",      state: "",   stateName: "Uttarakhand",   country: "India",  region: "International", lat: 30.3165, lng: 78.0322, logo: "assets/logos/Uttarakhand.jpeg", ig: null, email: null }
     ];
 
     var MAP = window.SPEECH_SPARK_US_MAP || { w: 960, h: 600, states: [], markers: {} };
@@ -47,7 +48,7 @@
 
     var detail = document.getElementById("chapter-detail");
     var mapPanel = document.getElementById("map-panel");
-    var usChapters = CHAPTERS.filter(function (c) { return c.country === "United States"; });
+    var mapChapters = CHAPTERS.filter(function (c) { return MAP.markers && MAP.markers[c.name]; });
 
     function contactBlock(ch) {
         var igHandle = ch.ig || ORG_IG;
@@ -67,7 +68,7 @@
             '<div class="cd-head">' +
                 '<img class="cd-logo" src="' + ch.logo + '" alt="' + ch.name + ' chapter logo">' +
                 '<div><h3>' + ch.name + '</h3>' +
-                '<p class="cd-loc">' + locationLabel(ch) + (ch.country !== "United States" ? " · " + ch.country : "") + '</p></div>' +
+                '<p class="cd-loc">' + locationLabel(ch) + '</p></div>' +
             '</div>' +
             '<p class="cd-desc">' + describe(ch) + '</p>' +
             contactBlock(ch);
@@ -120,7 +121,7 @@
         svg.setAttribute("viewBox", "0 0 " + MAP.w + " " + MAP.h);
         svg.setAttribute("class", "us-map");
         svg.setAttribute("role", "img");
-        svg.setAttribute("aria-label", "Map of Speech Spark chapters in the United States. Scroll to zoom, drag to pan.");
+        svg.setAttribute("aria-label", "World map of Speech Spark chapters across the United States and internationally. Scroll to zoom, drag to pan.");
 
         zoomLayer = document.createElementNS(SVGNS, "g");
 
@@ -134,7 +135,19 @@
         });
         zoomLayer.appendChild(states);
 
-        usChapters.forEach(function (ch) {
+        if (MAP.subdivisions && MAP.subdivisions.length) {
+            var subs = document.createElementNS(SVGNS, "g");
+            subs.setAttribute("class", "us-subs");
+            MAP.subdivisions.forEach(function (d) {
+                var p = document.createElementNS(SVGNS, "path");
+                p.setAttribute("d", d);
+                p.setAttribute("vector-effect", "non-scaling-stroke");
+                subs.appendChild(p);
+            });
+            zoomLayer.appendChild(subs);
+        }
+
+        mapChapters.forEach(function (ch) {
             var xy = MAP.markers[ch.name] || [0, 0];
             var g = document.createElementNS(SVGNS, "g");
             g.setAttribute("class", "map-marker");
@@ -170,7 +183,23 @@
         mapPanel.insertBefore(svg, mapPanel.firstChild);
         addControls();
         bindGestures();
-        apply();
+        fitMarkers();
+    }
+
+    /* frame all chapter markers as the default view */
+    function fitMarkers() {
+        var xs = [], ys = [];
+        mapChapters.forEach(function (ch) {
+            var xy = MAP.markers[ch.name];
+            if (xy) { xs.push(xy[0]); ys.push(xy[1]); }
+        });
+        if (!xs.length) { scale = 1; tx = 0; ty = 0; apply(); return; }
+        var pad = 70;
+        var minX = Math.min.apply(null, xs), maxX = Math.max.apply(null, xs);
+        var minY = Math.min.apply(null, ys), maxY = Math.max.apply(null, ys);
+        var k = Math.min(MAP.w / (maxX - minX + pad * 2), MAP.h / (maxY - minY + pad * 2));
+        k = Math.max(1, Math.min(2.6, k));
+        zoomTo((minX + maxX) / 2, (minY + maxY) / 2, k);
     }
 
     function select(ch, doZoom) {
@@ -178,7 +207,7 @@
         var m = mapPanel.querySelector('.map-marker[data-name="' + ch.name + '"]');
         if (m) m.classList.add("selected");
         renderDetail(ch);
-        if (doZoom && m) zoomTo(+m.dataset.cx, +m.dataset.cy, 5);
+        if (doZoom && m) zoomTo(+m.dataset.cx, +m.dataset.cy, 7);
     }
 
     function addControls() {
@@ -193,7 +222,7 @@
             var act = b.dataset.act;
             if (act === "in") zoomAt(MAP.w / 2, MAP.h / 2, scale * 1.6);
             else if (act === "out") zoomAt(MAP.w / 2, MAP.h / 2, scale / 1.6);
-            else { scale = 1; tx = 0; ty = 0; apply(); }
+            else { fitMarkers(); }
         });
         mapPanel.appendChild(ctr);
     }
@@ -276,7 +305,7 @@
     var currentFilter = "";
     var currentSort = "az";
 
-    function groupKey(c) { return c.country === "United States" ? c.stateName : "International"; }
+    function groupKey(c) { return c.country === "United States" ? "USA" : "International"; }
 
     function populateFilter() {
         if (!filterWrap) return;
@@ -346,8 +375,11 @@
                     '<img class="dc-logo" src="' + c.logo + '" alt="' + c.name + ' chapter logo" loading="lazy">' +
                     '<div><h4>' + c.name + '</h4><span class="dc-loc">' + locationLabel(c) + '</span></div>';
                 card.addEventListener("click", function () {
-                    renderDetail(c);
-                    if (c.country === "United States") select(c, true);
+                    if (MAP.markers && MAP.markers[c.name]) {
+                        select(c, true);
+                    } else {
+                        renderDetail(c);
+                    }
                     if (mapPanel && mapPanel.scrollIntoView) mapPanel.scrollIntoView({ behavior: "smooth", block: "center" });
                 });
                 directory.appendChild(card);

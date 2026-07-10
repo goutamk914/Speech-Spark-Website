@@ -241,7 +241,7 @@ section {
 .nav-links {
     display: flex;
     align-items: center;
-    gap: 28px;
+    gap: 22px;
 }
 
 .nav-links a {
@@ -874,6 +874,34 @@ section {
     font-size: 0.98rem;
 }
 
+/* card variant — bordered activity boxes (camps page) */
+.timeline.cards {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+}
+
+.timeline.cards::before {
+    display: none;
+}
+
+.timeline.cards .timeline-step {
+    padding: 30px 28px;
+    background: var(--paper);
+    border: 1px solid var(--cream-line);
+    border-radius: 4px;
+    transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+.timeline.cards .timeline-step:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow);
+    border-color: transparent;
+}
+
+.timeline.cards .timeline-step .num {
+    font-size: 1.3rem;
+}
+
 .camps-cta {
     margin-top: 70px;
     background: var(--navy);
@@ -1145,6 +1173,14 @@ section {
 
 .us-states path:hover {
     fill: #e7d6ab;
+}
+
+.us-subs path {
+    fill: none;
+    stroke: #cbb079;
+    stroke-width: 0.7;
+    opacity: 0.75;
+    pointer-events: none;
 }
 
 .map-marker {
@@ -1662,6 +1698,52 @@ section {
     margin-top: 12px;
 }
 
+/* subtle donate strip (homepage) */
+.donate-strip {
+    background: var(--cream);
+}
+
+.donate-strip-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    background: var(--navy);
+    border-left: 4px solid var(--ember);
+    padding: 40px 48px;
+    border-radius: 0 4px 4px 0;
+}
+
+.donate-strip-inner .eyebrow {
+    color: var(--ember);
+}
+
+.donate-strip-text {
+    max-width: 640px;
+}
+
+.donate-strip-text h2 {
+    color: #fff;
+    font-size: clamp(1.7rem, 2.6vw, 2.2rem);
+    margin-bottom: 10px;
+}
+
+.donate-strip-text p {
+    color: rgba(255, 255, 255, 0.82);
+    margin: 0;
+}
+
+.donate-strip .secondary-button {
+    flex-shrink: 0;
+    border-color: rgba(255, 255, 255, 0.7);
+    color: #fff;
+}
+
+.donate-strip .secondary-button:hover {
+    background: #fff;
+    color: var(--navy);
+}
+
 /* ---- donate give section ---- */
 .give {
     background: var(--paper);
@@ -1850,6 +1932,43 @@ section {
     border-bottom: 1px solid var(--navy);
 }
 
+/* sponsors */
+.sponsors {
+    background: var(--paper);
+}
+
+.sponsor-board {
+    border: 2px dashed var(--cream-line);
+    border-radius: 6px;
+    padding: 54px 40px;
+    text-align: center;
+    background: var(--cream);
+}
+
+.sponsor-board p {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    color: var(--ink);
+    margin-bottom: 26px;
+}
+
+.sponsor-board .donate-actions {
+    margin-top: 0;
+}
+
+.sponsor-note {
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--ink-faint);
+    margin-top: 22px;
+}
+
+.sponsor-note a {
+    color: var(--navy);
+    font-weight: 600;
+    border-bottom: 1px solid var(--navy);
+}
+
 .cta .secondary-button {
     border-color: rgba(255, 255, 255, 0.6);
     color: #fff;
@@ -1886,6 +2005,23 @@ footer {
 .footer-brand p {
     max-width: 300px;
     font-size: 0.95rem;
+}
+
+.footer-donate {
+    display: inline-block;
+    margin-top: 20px;
+    background: var(--ember);
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.9rem;
+    padding: 12px 26px;
+    border-radius: 3px;
+    transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.footer-donate:hover {
+    background: #a9621f;
+    transform: translateY(-2px);
 }
 
 .footer-col h4 {

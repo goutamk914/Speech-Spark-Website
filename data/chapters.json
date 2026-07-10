@@ -18,6 +18,7 @@
     { "name": "Spokane",        "city": "Spokane",        "state": "WA", "stateName": "Washington",    "country": "United States", "region": "Pacific Northwest", "lat": 47.659, "lng": -117.426, "logo": "assets/logos/Spokane.PNG" },
     { "name": "Chandigarh",     "city": "Chandigarh",     "state": "",   "stateName": "Chandigarh",    "country": "India",          "region": "International",     "lat": 30.733, "lng": 76.779, "logo": "assets/logos/Chandigarh.PNG" },
     { "name": "Lucknow",        "city": "Lucknow",        "state": "",   "stateName": "Uttar Pradesh", "country": "India",          "region": "International",     "lat": 26.847, "lng": 80.947, "logo": "assets/logos/Lucknow.PNG" },
-    { "name": "Nepal",          "city": "Kathmandu",      "state": "",   "stateName": "Bagmati",       "country": "Nepal",          "region": "International",     "lat": 27.717, "lng": 85.324, "logo": "assets/logos/Nepal.PNG" }
+    { "name": "Nepal",          "city": "Kathmandu",      "state": "",   "stateName": "Bagmati",       "country": "Nepal",          "region": "International",     "lat": 27.717, "lng": 85.324, "logo": "assets/logos/Nepal.PNG" },
+    { "name": "Uttarakhand",    "city": "Dehradun",       "state": "",   "stateName": "Uttarakhand",   "country": "India",          "region": "International",     "lat": 30.3165, "lng": 78.0322, "logo": "assets/logos/Uttarakhand.jpeg" }
   ]
 }
