@@ -32,6 +32,14 @@
         padding: 84px 0;
     }
 
+    .voice-rings {
+        display: none;
+    }
+
+    .page-header .wrapper {
+        max-width: none;
+    }
+
     /* mobile navigation */
     .nav-toggle {
         display: block;

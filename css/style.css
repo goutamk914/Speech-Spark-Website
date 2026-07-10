@@ -17,8 +17,8 @@
     --shadow: 0 18px 40px rgba(26, 23, 18, 0.10);
     --shadow-soft: 0 10px 30px rgba(26, 23, 18, 0.07);
     --radius: 4px;
-    --serif: "Cormorant Garamond", Georgia, serif;
-    --sans: "Manrope", system-ui, -apple-system, sans-serif;
+    --serif: "Fraunces", "Iowan Old Style", Georgia, serif;
+    --sans: "Libre Franklin", system-ui, -apple-system, sans-serif;
     --wrap: min(90%, 1240px);
     --wrap-wide: min(92%, 1400px);
 }
@@ -67,8 +67,9 @@ button {
 h1, h2, h3, h4 {
     font-family: var(--serif);
     font-weight: 600;
-    line-height: 1.04;
-    letter-spacing: -0.5px;
+    font-optical-sizing: auto;
+    line-height: 1.06;
+    letter-spacing: -0.2px;
     color: var(--ink);
 }
 
@@ -87,7 +88,7 @@ h1, h2, h3, h4 {
 }
 
 section {
-    padding: 120px 0;
+    padding: 104px 0;
 }
 
 .skip-link {
@@ -443,6 +444,13 @@ section {
     background: var(--navy);
     color: #fff;
     padding: 150px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.statement .wrapper {
+    position: relative;
+    z-index: 1;
 }
 
 .statement p {
@@ -949,6 +957,43 @@ section {
 .us-map {
     width: 100%;
     height: auto;
+    display: block;
+    cursor: grab;
+    touch-action: none;
+}
+
+.us-map.grabbing {
+    cursor: grabbing;
+}
+
+.map-controls {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    z-index: 2;
+}
+
+.map-controls button {
+    width: 38px;
+    height: 38px;
+    background: var(--paper);
+    border: 1px solid var(--cream-line);
+    font-size: 1.2rem;
+    line-height: 1;
+    color: var(--navy);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-soft);
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.map-controls button:hover {
+    background: var(--cream);
+    transform: translateY(-1px);
 }
 
 .us-states path {
@@ -970,21 +1015,26 @@ section {
     fill: var(--navy);
     stroke: #fff;
     stroke-width: 2;
-    transition: r 0.2s ease, fill 0.2s ease;
+    transition: fill 0.2s ease;
 }
 
 .map-marker:hover circle.pin,
 .map-marker.selected circle.pin {
     fill: var(--ember);
-    r: 9;
+    stroke-width: 3;
+}
+
+.map-marker.selected circle.pulse {
+    opacity: 0;
 }
 
 .map-marker circle.pulse {
     fill: var(--navy);
-    opacity: 0.35;
+    opacity: 0.3;
     transform-origin: center;
     transform-box: fill-box;
-    animation: markerPulse 2.6s ease-out infinite;
+    animation: markerPulse 2.8s ease-out infinite;
+    pointer-events: none;
 }
 
 .map-legend {
@@ -1014,29 +1064,26 @@ section {
     justify-content: center;
 }
 
-.chapter-detail .cd-logo {
-    width: 92px;
-    height: 92px;
-    background: #fff;
-    border-radius: 50%;
-    padding: 10px;
-    margin-bottom: 24px;
+.chapter-detail .cd-head {
     display: flex;
     align-items: center;
-    justify-content: center;
-    overflow: hidden;
+    gap: 18px;
+    margin-bottom: 22px;
 }
 
-.chapter-detail .cd-logo img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+.chapter-detail .cd-logo {
+    width: 76px;
+    height: 76px;
+    border-radius: 10px;
+    object-fit: cover;
+    flex-shrink: 0;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
 }
 
 .chapter-detail h3 {
     color: #fff;
-    font-size: 2.2rem;
-    margin-bottom: 6px;
+    font-size: 1.9rem;
+    margin-bottom: 4px;
 }
 
 .chapter-detail .cd-loc {
@@ -1044,8 +1091,7 @@ section {
     font-weight: 600;
     letter-spacing: 1px;
     text-transform: uppercase;
-    font-size: 0.82rem;
-    margin-bottom: 20px;
+    font-size: 0.78rem;
 }
 
 .chapter-detail .cd-desc {
@@ -1056,19 +1102,43 @@ section {
 
 .chapter-detail .cd-contact {
     border-top: 1px solid rgba(255, 255, 255, 0.18);
-    padding-top: 20px;
-    font-size: 0.92rem;
-    color: rgba(255, 255, 255, 0.7);
+    padding-top: 18px;
+    display: grid;
+    gap: 12px;
 }
 
-.chapter-detail .cd-contact a {
+.chapter-detail .cd-row {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font-size: 0.95rem;
+}
+
+.chapter-detail .cd-row > span {
+    font-size: 0.72rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.55);
+    font-weight: 700;
+}
+
+.chapter-detail .cd-row a {
     color: #fff;
     border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+    width: fit-content;
+}
+
+.chapter-detail .cd-flag {
+    font-size: 0.72rem;
+    color: var(--ember);
+    letter-spacing: 0.5px;
+    font-weight: 700;
 }
 
 .chapter-detail .cd-hint {
-    color: rgba(255, 255, 255, 0.55);
-    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.62);
+    font-size: 0.98rem;
+    line-height: 1.6;
 }
 
 /* directory */
@@ -1131,10 +1201,10 @@ section {
 .directory-card {
     background: var(--paper);
     border: 1px solid var(--cream-line);
-    padding: 26px;
+    padding: 18px;
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    gap: 16px;
     text-align: left;
     transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
@@ -1146,28 +1216,17 @@ section {
 }
 
 .directory-card .dc-logo {
-    width: 60px;
-    height: 60px;
-    background: var(--cream);
-    border-radius: 50%;
-    padding: 8px;
-    margin-bottom: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-}
-
-.directory-card .dc-logo img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+    width: 56px;
+    height: 56px;
+    border-radius: 10px;
+    object-fit: cover;
+    flex-shrink: 0;
 }
 
 .directory-card h4 {
     font-family: var(--sans);
-    font-size: 1.1rem;
-    margin-bottom: 4px;
+    font-size: 1.05rem;
+    margin-bottom: 2px;
 }
 
 .directory-card .dc-loc {
@@ -1347,6 +1406,13 @@ section {
     background: var(--navy);
     color: #fff;
     text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.cta .wrapper {
+    position: relative;
+    z-index: 1;
 }
 
 .cta h2 {
@@ -1396,9 +1462,8 @@ footer {
 }
 
 .footer-brand img {
-    width: 160px;
+    width: 150px;
     margin-bottom: 22px;
-    filter: brightness(0) invert(1);
 }
 
 .footer-brand p {
@@ -1471,6 +1536,14 @@ footer {
     padding: 180px 0 90px;
     background: var(--navy);
     color: #fff;
+    position: relative;
+    overflow: hidden;
+}
+
+.page-header .wrapper {
+    position: relative;
+    z-index: 1;
+    max-width: 680px;
 }
 
 .page-header .eyebrow {

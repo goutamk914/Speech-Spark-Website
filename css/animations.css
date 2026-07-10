@@ -106,6 +106,115 @@
     }
 }
 
+/* ==========================
+   VOICE RINGS — motion in the empty space beside headings
+   Concentric rings expand outward from a warm core, like a
+   voice carrying across a room.
+========================== */
+
+.voice-rings {
+    position: absolute;
+    right: 5%;
+    top: 50%;
+    width: 360px;
+    height: 360px;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.voice-rings .ring {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 360px;
+    height: 360px;
+    border-radius: 50%;
+    border: 1px solid rgba(254, 244, 217, 0.32);
+    opacity: 0;
+    animation: ringExpand 5.5s ease-out infinite;
+}
+
+.voice-rings .ring:nth-child(2) { animation-delay: 1.1s; }
+.voice-rings .ring:nth-child(3) { animation-delay: 2.2s; }
+.voice-rings .ring:nth-child(4) { animation-delay: 3.3s; }
+
+.voice-rings .core {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--ember);
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 0 8px rgba(196, 122, 44, 0.22);
+    animation: coreGlow 3s ease-in-out infinite;
+}
+
+.voice-rings .spark {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(254, 244, 217, 0.75);
+    left: 50%;
+    top: 50%;
+}
+
+.voice-rings .spark.s1 { animation: orbit1 9s linear infinite; }
+.voice-rings .spark.s2 { animation: orbit2 13s linear infinite; width: 6px; height: 6px; background: rgba(196, 122, 44, 0.85); }
+.voice-rings .spark.s3 { animation: orbit3 17s linear infinite; width: 5px; height: 5px; }
+
+@keyframes ringExpand {
+    0%   { transform: scale(0.18); opacity: 0; }
+    12%  { opacity: 0.9; }
+    100% { transform: scale(1); opacity: 0; }
+}
+
+@keyframes coreGlow {
+    0%, 100% { box-shadow: 0 0 0 6px rgba(196, 122, 44, 0.18); }
+    50%      { box-shadow: 0 0 0 12px rgba(196, 122, 44, 0.30); }
+}
+
+@keyframes orbit1 {
+    from { transform: rotate(0deg) translateX(150px) rotate(0deg); }
+    to   { transform: rotate(360deg) translateX(150px) rotate(-360deg); }
+}
+@keyframes orbit2 {
+    from { transform: rotate(120deg) translateX(105px) rotate(-120deg); }
+    to   { transform: rotate(480deg) translateX(105px) rotate(-480deg); }
+}
+@keyframes orbit3 {
+    from { transform: rotate(240deg) translateX(178px) rotate(-240deg); }
+    to   { transform: rotate(600deg) translateX(178px) rotate(-600deg); }
+}
+
+/* drifting dots for large dark bands (statement / CTA) */
+.band-motion {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.band-motion span {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(254, 244, 217, 0.10);
+    animation: drift 22s ease-in-out infinite;
+}
+
+.band-motion span:nth-child(1) { width: 120px; height: 120px; left: 8%;  top: 20%; }
+.band-motion span:nth-child(2) { width: 60px;  height: 60px;  left: 78%; top: 30%; animation-delay: -4s; background: rgba(196, 122, 44, 0.16); }
+.band-motion span:nth-child(3) { width: 180px; height: 180px; left: 62%; top: 55%; animation-delay: -9s; }
+.band-motion span:nth-child(4) { width: 40px;  height: 40px;  left: 30%; top: 68%; animation-delay: -13s; background: rgba(196, 122, 44, 0.14); }
+
+@keyframes drift {
+    0%, 100% { transform: translate(0, 0); }
+    33%      { transform: translate(28px, -22px); }
+    66%      { transform: translate(-20px, 18px); }
+}
+
 /* respect user motion preferences */
 @media (prefers-reduced-motion: reduce) {
     *,
