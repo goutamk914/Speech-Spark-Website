@@ -44,24 +44,39 @@
         </div>
     </section>
 
-    <!-- Live stats from Hack Club HCB -->
-    <section class="impact">
+    <!-- Give: goal tracker + prominent donate CTA -->
+    <section class="give">
         <div class="wrapper">
-            <div class="section-head center reveal">
-                <p class="eyebrow">Transparent Finances</p>
-                <h2>Where we stand today.</h2>
+            <div class="give-inner">
+                <div class="give-tracker reveal">
+                    <p class="eyebrow">Our Fundraising Goal</p>
+                    <div class="raised-amt" id="stat-raised">$0</div>
+                    <div class="raised-cap">Raised so far</div>
+                    <div class="goal-bar" role="progressbar" aria-label="Fundraising progress"><div class="goal-fill" id="goal-fill"></div></div>
+                    <p class="goal-label" id="goal-text">Loading live total…</p>
+                    <p class="hcb-note">
+                        <span id="hcb-status">Live from Hack Club HCB</span><br>
+                        Every dollar is tracked publicly on Hack Club HCB
+                    </p>
+                </div>
+                <div class="give-cta reveal">
+                    <p class="eyebrow">Make a Difference Today</p>
+                    <h2>Fund a student's first time speaking up.</h2>
+                    <p>A single gift keeps a camp free, puts materials in a student's hands, and helps a new chapter open its doors. Your donation goes directly to the work and you can watch it add up, live.</p>
+                    <a href="https://hcb.hackclub.com/donations/start/speech-spark" class="donate-btn-lg" target="_blank" rel="noopener">Donate to Speech Spark</a>
+                    <p class="give-sub">Secure donations via Hack Club HCB · tax-deductible through The Hack Foundation, a 501(c)(3). Prefer to sponsor a camp? <a href="contact.html">Get in touch</a>.</p>
+                </div>
             </div>
-            <div class="impact-grid stagger">
-                <div class="impact-stat"><div class="num" id="stat-raised">—</div><div class="label">Total Raised</div></div>
-                <div class="impact-stat"><div class="num" id="stat-balance">—</div><div class="label">Current Balance</div></div>
-                <div class="impact-stat"><div class="num" id="stat-team">—</div><div class="label">Organizers</div></div>
-                <div class="impact-stat"><div class="num" id="stat-since">—</div><div class="label">Founded</div></div>
+
+            <div class="recent-card reveal">
+                <div class="recent-head">
+                    <h3>Recent donations</h3>
+                    <a href="https://hcb.hackclub.com/speech-spark" target="_blank" rel="noopener" class="text-link">View all on HCB</a>
+                </div>
+                <ul class="recent-list" id="recent-donations">
+                    <li class="recent-empty">Loading recent donations…</li>
+                </ul>
             </div>
-            <p class="hcb-note">
-                <span id="hcb-status">Loading live figures…</span><br>
-                Speech Spark's finances are hosted transparently on
-                <a href="https://hcb.hackclub.com/speech-spark" target="_blank" rel="noopener">Hack Club HCB</a> — every transaction is public.
-            </p>
         </div>
     </section>
 

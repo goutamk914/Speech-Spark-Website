@@ -147,7 +147,8 @@
     .prose-split,
     .contact-grid,
     .resource-grid,
-    .coaching-inner {
+    .coaching-inner,
+    .give-inner {
         grid-template-columns: 1fr;
         gap: 50px;
     }
