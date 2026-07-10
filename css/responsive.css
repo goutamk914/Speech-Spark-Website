@@ -145,9 +145,23 @@
     /* volunteer / prose / contact */
     .volunteer-container,
     .prose-split,
-    .contact-grid {
+    .contact-grid,
+    .resource-grid,
+    .coaching-inner {
         grid-template-columns: 1fr;
         gap: 50px;
+    }
+
+    .coaching-inner {
+        gap: 0;
+    }
+
+    .coaching-media {
+        height: 260px;
+    }
+
+    .coaching-body {
+        padding: 40px 30px;
     }
 
     .prose-split.reverse .prose-media {

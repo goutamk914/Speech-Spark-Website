@@ -269,14 +269,17 @@
 
     var directory = document.getElementById("chapter-directory");
     var search = document.getElementById("chapter-search");
-    var stateSelect = document.getElementById("chapter-state");
-    var sortSelect = document.getElementById("chapter-sort");
+    var filterWrap = document.getElementById("chapter-filter");
+    var sortGroup = document.getElementById("chapter-sort");
     var countEl = document.getElementById("chapter-count");
+
+    var currentFilter = "";
+    var currentSort = "az";
 
     function groupKey(c) { return c.country === "United States" ? c.stateName : "International"; }
 
     function populateFilter() {
-        if (!stateSelect) return;
+        if (!filterWrap) return;
         var seen = {}, groups = [];
         CHAPTERS.forEach(function (c) { var k = groupKey(c); if (!seen[k]) { seen[k] = true; groups.push(k); } });
         groups.sort(function (a, b) {
@@ -284,16 +287,41 @@
             if (b === "International") return -1;
             return a.localeCompare(b);
         });
+        groups.unshift("");
+
         groups.forEach(function (g) {
-            var o = document.createElement("option"); o.value = g; o.textContent = g; stateSelect.appendChild(o);
+            var b = document.createElement("button");
+            b.type = "button";
+            b.textContent = g === "" ? "All chapters" : g;
+            b.dataset.filter = g;
+            if (g === currentFilter) b.classList.add("active");
+            b.addEventListener("click", function () {
+                currentFilter = g;
+                filterWrap.querySelectorAll("button").forEach(function (x) { x.classList.remove("active"); });
+                b.classList.add("active");
+                render();
+            });
+            filterWrap.appendChild(b);
+        });
+    }
+
+    function bindSort() {
+        if (!sortGroup) return;
+        sortGroup.addEventListener("click", function (e) {
+            var b = e.target.closest("button");
+            if (!b) return;
+            currentSort = b.dataset.sort;
+            sortGroup.querySelectorAll("button").forEach(function (x) { x.classList.remove("active"); });
+            b.classList.add("active");
+            render();
         });
     }
 
     function render() {
         if (!directory) return;
         var term = (search && search.value || "").trim().toLowerCase();
-        var filter = stateSelect && stateSelect.value || "";
-        var sort = sortSelect && sortSelect.value || "az";
+        var filter = currentFilter;
+        var sort = currentSort;
 
         var list = CHAPTERS.filter(function (c) {
             var okFilter = !filter || groupKey(c) === filter;
@@ -330,9 +358,8 @@
 
     buildMap();
     populateFilter();
+    bindSort();
     render();
     if (search) search.addEventListener("input", render);
-    if (stateSelect) stateSelect.addEventListener("change", render);
-    if (sortSelect) sortSelect.addEventListener("change", render);
 
 })();

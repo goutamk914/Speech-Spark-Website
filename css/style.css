@@ -172,12 +172,12 @@ section {
 }
 
 .secondary-button {
-    border: 1px solid var(--ink);
-    color: var(--ink);
+    border: 1px solid var(--navy);
+    color: var(--navy);
 }
 
 .secondary-button:hover {
-    background: var(--ink);
+    background: var(--navy);
     color: #fff;
     transform: translateY(-2px);
 }
@@ -222,14 +222,26 @@ section {
     transition: height 0.3s ease;
 }
 
+.logo {
+    display: flex;
+    align-items: center;
+}
+
 .logo img {
-    width: 158px;
+    height: 52px;
+    width: auto;
+    display: block;
+}
+
+.navbar.scrolled .logo img {
+    height: 46px;
+    transition: height 0.3s ease;
 }
 
 .nav-links {
     display: flex;
     align-items: center;
-    gap: 38px;
+    gap: 28px;
 }
 
 .nav-links a {
@@ -257,12 +269,13 @@ section {
 }
 
 .nav-button {
-    border: 1px solid var(--ink);
+    border: 1px solid var(--navy);
+    color: var(--navy);
     padding: 11px 24px;
 }
 
 .nav-button:hover {
-    background: var(--ink);
+    background: var(--navy);
     color: #fff;
 }
 
@@ -615,6 +628,133 @@ section {
     text-transform: uppercase;
     font-weight: 700;
     color: var(--navy);
+}
+
+/* ==========================
+   RESOURCE / CURRICULUM CARDS
+========================== */
+
+.resource-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 26px;
+}
+
+.resource-card {
+    display: flex;
+    gap: 22px;
+    align-items: flex-start;
+    background: var(--paper);
+    border: 1px solid var(--cream-line);
+    padding: 32px;
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.resource-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow);
+}
+
+.resource-card .doc-icon {
+    flex-shrink: 0;
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--cream);
+    border-radius: 8px;
+    color: var(--navy);
+}
+
+.resource-card .doc-icon svg {
+    width: 26px;
+    height: 26px;
+}
+
+.resource-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+}
+
+.resource-card p {
+    color: var(--ink-soft);
+    font-size: 0.98rem;
+    margin-bottom: 18px;
+}
+
+.resource-card .tag {
+    font-size: 0.72rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--ink-faint);
+    display: block;
+    margin-bottom: 14px;
+}
+
+/* one-on-one coaching highlight */
+.coaching {
+    background: var(--cream);
+}
+
+.coaching-inner {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 0;
+    align-items: stretch;
+    box-shadow: var(--shadow);
+}
+
+.coaching-media {
+    overflow: hidden;
+}
+
+.coaching-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.coaching-body {
+    background: var(--navy);
+    color: #fff;
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.coaching-body h2 {
+    color: #fff;
+    font-size: clamp(2rem, 3.2vw, 3rem);
+    margin-bottom: 20px;
+}
+
+.coaching-body p {
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 1.05rem;
+    margin-bottom: 18px;
+}
+
+.coaching-body .price-flag {
+    display: inline-block;
+    font-size: 0.75rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--ember);
+    margin-bottom: 20px;
+}
+
+.coaching-body .primary-button {
+    background: var(--ember);
+    align-self: flex-start;
+    margin-top: 8px;
+}
+
+.coaching-body .primary-button:hover {
+    background: #a9621f;
 }
 
 /* ==========================
@@ -1147,7 +1287,7 @@ section {
     display: flex;
     gap: 16px;
     flex-wrap: wrap;
-    margin-bottom: 34px;
+    margin-bottom: 16px;
     align-items: center;
 }
 
@@ -1177,19 +1317,78 @@ section {
     color: var(--ink-faint);
 }
 
-.directory-controls select {
-    padding: 14px 16px;
+.sort-group {
+    display: inline-flex;
     border: 1px solid var(--cream-line);
     background: var(--paper);
-    font-family: inherit;
-    font-size: 0.95rem;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.sort-group button {
+    padding: 13px 18px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--ink-faint);
+    border-right: 1px solid var(--cream-line);
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.sort-group button:last-child {
+    border-right: none;
+}
+
+.sort-group button:hover {
+    background: var(--cream);
     color: var(--ink);
+}
+
+.sort-group button.active {
+    background: var(--navy);
+    color: #fff;
+}
+
+.filter-bar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 34px;
+}
+
+.filter-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.filter-chips button {
+    padding: 8px 16px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: 1px solid var(--cream-line);
+    border-radius: 999px;
+    color: var(--ink-soft);
+    background: var(--paper);
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.filter-chips button:hover {
+    border-color: var(--navy);
+    color: var(--navy);
+}
+
+.filter-chips button.active {
+    background: var(--navy);
+    border-color: var(--navy);
+    color: #fff;
 }
 
 .directory-count {
     font-size: 0.88rem;
     color: var(--ink-faint);
     margin-left: auto;
+    white-space: nowrap;
 }
 
 .directory-grid {
@@ -1431,6 +1630,36 @@ section {
 
 .cta .hero-buttons {
     justify-content: center;
+}
+
+.cta .primary-button {
+    background: var(--ember);
+}
+
+.cta .primary-button:hover {
+    background: #a9621f;
+}
+
+/* donate live-stats note */
+.hcb-note {
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--ink-faint);
+    margin-top: 24px;
+}
+
+.hcb-note a {
+    color: var(--navy);
+    font-weight: 600;
+    border-bottom: 1px solid var(--navy);
+}
+
+.donate-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+    margin-top: 12px;
 }
 
 .cta .secondary-button {

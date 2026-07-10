@@ -26,6 +26,7 @@
                 <a href="camps.html">Speech Camps</a>
                 <a href="chapters.html">Chapters</a>
                 <a href="volunteer.html">Volunteer</a>
+                <a href="donate.html">Donate</a>
                 <a href="contact.html" class="nav-button">Contact</a>
             </nav>
         </div>
@@ -59,14 +60,15 @@
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3-3" stroke-linecap="round"/></svg>
                     <input type="search" id="chapter-search" placeholder="Search chapters or cities..." aria-label="Search chapters">
                 </div>
-                <select id="chapter-state" aria-label="Filter by state or region">
-                    <option value="">All locations</option>
-                </select>
-                <select id="chapter-sort" aria-label="Sort chapters">
-                    <option value="az">Sort: A–Z</option>
-                    <option value="za">Sort: Z–A</option>
-                    <option value="state">Sort: By state</option>
-                </select>
+                <div class="sort-group" id="chapter-sort" role="group" aria-label="Sort chapters">
+                    <button type="button" data-sort="az" class="active">A–Z</button>
+                    <button type="button" data-sort="za">Z–A</button>
+                    <button type="button" data-sort="state">By state</button>
+                </div>
+            </div>
+
+            <div class="filter-bar reveal">
+                <div class="filter-chips" id="chapter-filter" role="group" aria-label="Filter chapters by location"></div>
                 <span class="directory-count" id="chapter-count"></span>
             </div>
 
@@ -109,6 +111,7 @@
                     <h4>Get Involved</h4>
                     <a href="volunteer.html">Volunteer</a>
                     <a href="https://docs.google.com/forms/d/e/1FAIpQLSd--zFzzUYnIgWUZeGVBupkKX0qBzTiGZEEfWgyRt3ukHwYlg/viewform" target="_blank" rel="noopener">Start a Chapter</a>
+                    <a href="donate.html">Donate</a>
                     <a href="contact.html">Contact</a>
                     <a href="index.html#faq">FAQ</a>
                 </div>
