@@ -6,12 +6,20 @@ var CHAPTERS = window.SPEECH_SPARK_CHAPTERS || [];
 
     var ORG_IG = "speechsparksinitiative";
     var ORG_EMAIL = "speechsparksinitiative@gmail.com";
+    var LOGO_BASE = "assets/logos/";
 
     /* Per-chapter ig/email left null where not provided; the panel then shows
        the main organization's handle marked "(NOT GIVEN)". Fill these in as
        chapters share their own accounts. */
     var MAP = window.SPEECH_SPARK_US_MAP || { w: 960, h: 600, states: [], markers: {} };
     var SVGNS = "http://www.w3.org/2000/svg";
+
+    function logoSrc(ch) {
+        /* chapters-data.js only stores the filename (e.g. "Ashburn.PNG"), not
+           the folder path — this is the single place that turns it into a
+           real path, so a Sheet edit can never break the image again. */
+        return LOGO_BASE + ch.logo;
+    }
 
     function locationLabel(ch) {
         return ch.country === "United States" ? ch.city + ", " + ch.state : ch.city + ", " + ch.country;
@@ -44,7 +52,7 @@ var CHAPTERS = window.SPEECH_SPARK_CHAPTERS || [];
         detail.classList.add("filled");
         detail.innerHTML =
             '<div class="cd-head">' +
-                '<img class="cd-logo" src="' + ch.logo + '" alt="' + ch.name + ' chapter logo">' +
+                '<img class="cd-logo" src="' + logoSrc(ch) + '" alt="' + ch.name + ' chapter logo">' +
                 '<div><h3>' + ch.name + '</h3>' +
                 '<p class="cd-loc">' + locationLabel(ch) + '</p></div>' +
             '</div>' +
@@ -237,8 +245,6 @@ var CHAPTERS = window.SPEECH_SPARK_CHAPTERS || [];
 
         svg.addEventListener("pointermove", function (e) {
             if (!down) return;
-            /* only start panning (and capture the pointer) once the pointer
-               has actually moved — otherwise a tap is stolen from the pins */
             if (!panning && Math.hypot(e.clientX - startX, e.clientY - startY) > 5) {
                 panning = true;
                 svg.classList.add("grabbing");
@@ -350,7 +356,7 @@ var CHAPTERS = window.SPEECH_SPARK_CHAPTERS || [];
                 card.className = "directory-card"; card.type = "button";
                 card.setAttribute("aria-label", "View " + c.name + " chapter");
                 card.innerHTML =
-                    '<img class="dc-logo" src="' + c.logo + '" alt="' + c.name + ' chapter logo" loading="lazy">' +
+                    '<img class="dc-logo" src="' + logoSrc(c) + '" alt="' + c.name + ' chapter logo" loading="lazy">' +
                     '<div><h4>' + c.name + '</h4><span class="dc-loc">' + locationLabel(c) + '</span></div>';
                 card.addEventListener("click", function () {
                     if (MAP.markers && MAP.markers[c.name]) {
