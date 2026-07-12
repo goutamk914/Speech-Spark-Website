@@ -10,7 +10,7 @@ window.SPEECH_SPARK_CHAPTERS = [
     "lng": -77.487,
     "logo": "Ashburn.PNG",
     "ig": "speechsparksashburn",
-    "email": null
+    "email": "speechsparkashburn@gmail.com"
   },
   {
     "name": "Chantilly",
@@ -23,7 +23,7 @@ window.SPEECH_SPARK_CHAPTERS = [
     "lng": -77.431,
     "logo": "Chantilly.PNG",
     "ig": "speechsparkschantilly",
-    "email": null
+    "email": "speechsparkschantilly@gmail.com"
   },
   {
     "name": "Haymarket",
@@ -62,7 +62,7 @@ window.SPEECH_SPARK_CHAPTERS = [
     "lng": -77.178,
     "logo": "Mclean.PNG",
     "ig": "speechsparksmclean",
-    "email": null
+    "email": "speechsparkmclean@gmail.com"
   },
   {
     "name": "South Riding",
@@ -75,7 +75,7 @@ window.SPEECH_SPARK_CHAPTERS = [
     "lng": -77.513,
     "logo": "SouthRiding.PNG",
     "ig": "speechsparksouthriding",
-    "email": null
+    "email": "speechsparksr@gmail.com"
   },
   {
     "name": "Sterling",
@@ -88,7 +88,7 @@ window.SPEECH_SPARK_CHAPTERS = [
     "lng": -77.429,
     "logo": "Sterling.PNG",
     "ig": "speechsparkssterling",
-    "email": null
+    "email": "speechsparks.sterling@gmail.com"
   },
   {
     "name": "Woodbridge",
@@ -114,7 +114,7 @@ window.SPEECH_SPARK_CHAPTERS = [
     "lng": -74.667,
     "logo": "Princeton.PNG",
     "ig": "speechsparkprinceton",
-    "email": null
+    "email": "speechsparkprinceton@gmail.com"
   },
   {
     "name": "Brookfield",
@@ -139,8 +139,8 @@ window.SPEECH_SPARK_CHAPTERS = [
     "lat": 28.538,
     "lng": -81.379,
     "logo": "Orlando.PNG",
-    "ig": null,
-    "email": null
+    "ig": "speechsparkorlando",
+    "email": "speechsparkorlando@gmail.com"
   },
   {
     "name": "South Florida",
@@ -192,7 +192,7 @@ window.SPEECH_SPARK_CHAPTERS = [
     "lng": -122.332,
     "logo": "Seattle.PNG",
     "ig": "speechsparkseattle",
-    "email": null
+    "email": "speechsparks.seattle@gmail.com"
   },
   {
     "name": "Spokane",
@@ -258,5 +258,18 @@ window.SPEECH_SPARK_CHAPTERS = [
     "logo": "Uttarakhand.jpeg",
     "ig": null,
     "email": null
+  },
+  {
+    "name": "Southern Illinois",
+    "city": "Carbondale Metro Area",
+    "state": "IL",
+    "stateName": "Illinois",
+    "country": "United States",
+    "region": "Midwest",
+    "lat": 37.727,
+    "lng": -89.217,
+    "logo": "Southil.PNG",
+    "ig": "speechsparksouth.il",
+    "email": "speechsparksouth.IL@gmail.com"
   }
 ];
