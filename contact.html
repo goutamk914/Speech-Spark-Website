@@ -6,9 +6,10 @@
     <title>Contact | Speech Spark</title>
     <meta name="description" content="Contact Speech Spark about camp registration, chapters, volunteering, sponsorships, or general questions.">
     <meta name="theme-color" content="#fef4d9">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Libre+Franklin:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="assets/logos/Main.png">
+    <link rel="preconnect" href="https://api.fontshare.com">
+    <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/animations.css">
     <link rel="stylesheet" href="css/responsive.css">
@@ -68,6 +69,11 @@
                 </div>
 
                 <form class="contact-form reveal" id="contact-form">
+                    <!-- Web3Forms: replace the value below with your free access key from https://web3forms.com (enter speechsparksinitiative@gmail.com to receive it) -->
+                    <input type="hidden" name="access_key" value="529ede5c-9fe5-4551-8bfc-833564f2c552">
+                    <input type="hidden" name="subject" value="New inquiry from the Speech Spark website">
+                    <input type="hidden" name="from_name" value="Speech Spark Website">
+                    <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
                     <div class="form-row">
                         <label for="cf-name">Name</label>
                         <input type="text" id="cf-name" name="name" autocomplete="name" required>
@@ -91,7 +97,8 @@
                         <textarea id="cf-message" name="message" required></textarea>
                     </div>
                     <button type="submit" class="primary-button">Send Message</button>
-                    <p class="form-note">This form opens your email app with the details filled in, addressed to the Speech Spark team.</p>
+                    <p class="form-status" id="cf-status" role="status" aria-live="polite"></p>
+                    <p class="form-note">Your message is sent straight to the Speech Spark team — we'll reply to the email you provide.</p>
                 </form>
             </div>
         </div>
@@ -103,7 +110,7 @@
         <div class="wrapper wide">
             <div class="footer-top">
                 <div class="footer-brand">
-                    <img src="assets/logos/Main-light.png" alt="Speech Spark">
+                    <img src="assets/logos/Main.png" alt="Speech Spark">
                     <p>A student-led nonprofit teaching debate, speech, Model UN, and communication through beginner-friendly camps and chapters.</p>
                     <a class="footer-donate" href="https://hcb.hackclub.com/donations/start/speech-spark" target="_blank" rel="noopener">Donate</a>
                 </div>
@@ -126,7 +133,7 @@
                     <h4>Connect</h4>
                     <a href="mailto:speechsparksinitiative@gmail.com">speechsparksinitiative@gmail.com</a>
                     <a href="https://www.instagram.com/speechsparksinitiative/" target="_blank" rel="noopener">@speechsparksinitiative</a>
-                    <a href="https://github.com/Gootam1914/Speech-Spark-Website" target="_blank" rel="noopener">GitHub</a>
+                    <a href="https://www.linkedin.com/company/speech-spark-initiative/" target="_blank" rel="noopener">LinkedIn</a>
                 </div>
             </div>
             <div class="footer-bottom">
@@ -146,17 +153,36 @@
         (function () {
             var form = document.getElementById("contact-form");
             if (!form) return;
+            var status = document.getElementById("cf-status");
+            var button = form.querySelector('button[type="submit"]');
+
             form.addEventListener("submit", function (e) {
                 e.preventDefault();
-                var name = document.getElementById("cf-name").value;
-                var email = document.getElementById("cf-email").value;
-                var topic = document.getElementById("cf-topic").value;
-                var message = document.getElementById("cf-message").value;
-                var subject = "Speech Spark inquiry: " + topic;
-                var body = "Name: " + name + "\nEmail: " + email + "\n\n" + message;
-                window.location.href = "mailto:speechsparksinitiative@gmail.com" +
-                    "?subject=" + encodeURIComponent(subject) +
-                    "&body=" + encodeURIComponent(body);
+                status.textContent = "Sending…";
+                status.className = "form-status sending";
+                button.disabled = true;
+
+                fetch("https://api.web3forms.com/submit", {
+                    method: "POST",
+                    headers: { "Accept": "application/json" },
+                    body: new FormData(form)
+                })
+                .then(function (r) { return r.json(); })
+                .then(function (data) {
+                    if (data.success) {
+                        status.textContent = "Thanks! Your message has been sent — we'll be in touch soon.";
+                        status.className = "form-status ok";
+                        form.reset();
+                    } else {
+                        status.textContent = "Sorry, something went wrong. Please email us directly at speechsparksinitiative@gmail.com.";
+                        status.className = "form-status err";
+                    }
+                })
+                .catch(function () {
+                    status.textContent = "Sorry, something went wrong. Please email us directly at speechsparksinitiative@gmail.com.";
+                    status.className = "form-status err";
+                })
+                .finally(function () { button.disabled = false; });
             });
         })();
     </script>

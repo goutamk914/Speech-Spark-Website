@@ -17,8 +17,8 @@
     --shadow: 0 18px 40px rgba(26, 23, 18, 0.10);
     --shadow-soft: 0 10px 30px rgba(26, 23, 18, 0.07);
     --radius: 4px;
-    --serif: "Fraunces", "Iowan Old Style", Georgia, serif;
-    --sans: "Libre Franklin", system-ui, -apple-system, sans-serif;
+    --serif: "Satoshi", "General Sans", system-ui, -apple-system, sans-serif;
+    --sans: "General Sans", "Satoshi", system-ui, -apple-system, sans-serif;
     --wrap: min(90%, 1240px);
     --wrap-wide: min(92%, 1400px);
 }
@@ -38,8 +38,15 @@ body {
     background: var(--cream);
     color: var(--ink);
     line-height: 1.7;
+    font-weight: 500;
+    letter-spacing: -0.005em;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
+}
+
+/* form controls inherit the bolder base weight too */
+input, select, textarea, button {
+    font-weight: 500;
 }
 
 img {
@@ -66,12 +73,12 @@ button {
 
 h1, h2, h3, h4 {
     font-family: var(--serif);
-    font-weight: 600;
-    font-optical-sizing: auto;
-    line-height: 1.06;
-    letter-spacing: -0.2px;
+    font-weight: 700;
+    line-height: 1.04;
+    letter-spacing: -0.025em;
     color: var(--ink);
 }
+
 
 :focus-visible {
     outline: 2px solid var(--navy);
@@ -277,6 +284,11 @@ section {
 .nav-button:hover {
     background: var(--navy);
     color: #fff;
+}
+
+/* the pill button shouldn't get the underline bar the text links use */
+.nav-links a.nav-button::after {
+    display: none;
 }
 
 .nav-toggle {
@@ -1200,18 +1212,6 @@ section {
     stroke-width: 3;
 }
 
-.map-marker.selected circle.pulse {
-    opacity: 0;
-}
-
-.map-marker circle.pulse {
-    fill: var(--navy);
-    opacity: 0.3;
-    transform-origin: center;
-    transform-box: fill-box;
-    animation: markerPulse 2.8s ease-out infinite;
-    pointer-events: none;
-}
 
 .map-legend {
     position: absolute;
@@ -2000,6 +2000,10 @@ footer {
 .footer-brand img {
     width: 150px;
     margin-bottom: 22px;
+    background: var(--cream);
+    padding: 12px 16px;
+    border-radius: 12px;
+    box-sizing: content-box;
 }
 
 .footer-brand p {
@@ -2237,4 +2241,26 @@ footer {
     font-size: 0.85rem;
     color: var(--ink-faint);
     margin-top: 16px;
+}
+
+.form-status {
+    margin-top: 16px;
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.form-status:empty {
+    display: none;
+}
+
+.form-status.sending {
+    color: var(--ink-faint);
+}
+
+.form-status.ok {
+    color: #1d7a4d;
+}
+
+.form-status.err {
+    color: #b23b3b;
 }

@@ -30,7 +30,7 @@
         { name: "Lucknow",       city: "Lucknow",       state: "",   stateName: "Uttar Pradesh", country: "India",  region: "International", lat: 26.847, lng: 80.947, logo: "assets/logos/Lucknow.PNG", ig: null, email: null },
         { name: "Nepal",         city: "Kathmandu",     state: "",   stateName: "Bagmati",       country: "Nepal",  region: "International", lat: 27.717, lng: 85.324, logo: "assets/logos/Nepal.PNG", ig: "speechsparknepal", email: null },
         { name: "Uttarakhand",   city: "Dehradun",      state: "",   stateName: "Uttarakhand",   country: "India",  region: "International", lat: 30.3165, lng: 78.0322, logo: "assets/logos/Uttarakhand.jpeg", ig: null, email: null },
-        { name: "South Illinois", city: "Southern Illinois", state: "IL", stateName: "Illinois",  country: "United States", region: "Midwest",           lat: 37.7273, lng: -89.2168, logo: "assets/logos/Main.png", ig: "speechsparksouth.il", email: "speechsparksouth.IL@gmail.com" }
+        { name: "South Illinois", city: "Southern Illinois", state: "IL", stateName: "Illinois",  country: "United States", region: "Midwest",           lat: 37.7273, lng: -89.2168, logo: "assets/logos/SI.jpeg", ig: "speechsparksouth.il", email: "speechsparksouth.IL@gmail.com" }
     ];
 
     var MAP = window.SPEECH_SPARK_US_MAP || { w: 960, h: 600, states: [], markers: {} };
@@ -91,7 +91,7 @@
         clampT();
         zoomLayer.setAttribute("transform", "translate(" + tx.toFixed(2) + " " + ty.toFixed(2) + ") scale(" + scale.toFixed(3) + ")");
         var r = (BASE_R / scale).toFixed(2);
-        zoomLayer.querySelectorAll(".pin, .pulse").forEach(function (c) { c.setAttribute("r", r); });
+        zoomLayer.querySelectorAll(".pin").forEach(function (c) { c.setAttribute("r", r); });
     }
 
     function pointerViewBox(evt) {
@@ -159,10 +159,6 @@
             g.dataset.cx = xy[0];
             g.dataset.cy = xy[1];
 
-            var pulse = document.createElementNS(SVGNS, "circle");
-            pulse.setAttribute("class", "pulse");
-            pulse.setAttribute("cx", xy[0]); pulse.setAttribute("cy", xy[1]); pulse.setAttribute("r", BASE_R);
-
             var pin = document.createElementNS(SVGNS, "circle");
             pin.setAttribute("class", "pin");
             pin.setAttribute("cx", xy[0]); pin.setAttribute("cy", xy[1]); pin.setAttribute("r", BASE_R);
@@ -171,7 +167,7 @@
             var title = document.createElementNS(SVGNS, "title");
             title.textContent = ch.name + " — " + locationLabel(ch);
 
-            g.appendChild(pulse); g.appendChild(pin); g.appendChild(title);
+            g.appendChild(pin); g.appendChild(title);
 
             g.addEventListener("keydown", function (e) {
                 if (e.key === "Enter" || e.key === " ") { e.preventDefault(); select(ch, true); }
